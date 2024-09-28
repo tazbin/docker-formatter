@@ -52,23 +52,36 @@ Before using this tool, make sure you have the following installed:
 
 ## Installation
 
-1. Clone the repository:
+#### 1. Clone the repository:
 
 ```bash
 git clone https://github.com/tazbin/docker-formatter.git
+```
+
+Navigate to the directory
+```bash
 cd docker-formatter
 ```
 
-2. Create the executable
+#### 2. Create the executable
 ```bash
 go build -o docker-formatter main.go
 ```
-3. Place the executable in the `usr/local/bin` directory
+
+#### 3. Move the executable in the `usr/local/bin` directory
 ```bash
 mv docker-formatter /usr/local/bin
 ```
 
-4. Add this to your `.zshrc` file
+#### 4. Update your shell configuration
+You need to add the following snippet to your shell configuration file. Since I'm using **Zsh**, I will add it to the `~/.zshrc` file. For other shells, refer to the appropriate configuration file (`~/.bashrc` for **Bash** or `~/.profile` for **sh**).
+
+Open your shell configuration file:
+```bash
+nano ~/.zshrc
+```
+
+Add the following function:
 ```bash
 docker() {
     if [ "$1" = "fps" ] && [ "$2" = "-a" ]; then
@@ -81,12 +94,12 @@ docker() {
 }
 ```
 
-5. Now finally source `.zshrc` file
+#### 5. After modifying `.zshrc`, run the following command to apply the changes
 ```bash
 source ~/.zshrc
-```****
+```
 
-6. Now running `docker fps` command will show output in formatter way
+#### 6. Now running `docker fps` command will show output in formatter way
 ```bash
  # SHOWING ONLY RUNNING CONTAINERS:
 ·--------------·-------------·----------------------·-------------------·-------------------------·
