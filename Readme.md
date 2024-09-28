@@ -104,7 +104,6 @@ source ~/.zshrc
 Running `docker fps` command will show output in formatter way
 ```bash
  # SHOWING ONLY RUNNING CONTAINERS:
- # SHOWING ONLY RUNNING CONTAINERS:
 ·--------------·-------------·----------------------·------------·-------------------------·
 | CONTAINER ID |    IMAGE    |    CONTAINER NAME    |   STATUS   |          PORTS          |
 ·--------------·-------------·----------------------·------------·-------------------------·
