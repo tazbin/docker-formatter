@@ -44,18 +44,6 @@ func main() {
 		return
 	}
 
-	lines := strings.Split(strings.TrimSpace(string(output)), "\n")
-
-	var containers []Container
-	for _, line := range lines {
-		var container Container
-		if err := json.Unmarshal([]byte(line), &container); err != nil {
-			fmt.Println("Error parsing JSON:", err)
-			return
-		}
-		containers = append(containers, container)
-	}
-
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader([]string{"Container ID", "Image", "Container Name", "Status", "Ports"})
 	table.SetBorder(true)
@@ -64,21 +52,36 @@ func main() {
 	table.SetHeaderLine(true)
 	table.SetTablePadding("\t")
 
-	for _, container := range containers {
-		portsList := strings.Split(container.Ports, ",")
-		for i := range portsList {
-			portsList[i] = strings.TrimSpace(portsList[i])
-		}
-		ports := strings.Join(portsList, ",\n")
+	if len(output) >= 1 {
 
-		table.Append([]string{
-			container.ID[:12],
-			container.Image,
-			container.Names,
-			container.Status,
-			ports,
-		})
-		table.Append([]string{"", "", "", "", ""})
+		lines := strings.Split(strings.TrimSpace(string(output)), "\n")
+
+		var containers []Container
+		for _, line := range lines {
+			var container Container
+			if err := json.Unmarshal([]byte(line), &container); err != nil {
+				fmt.Println("Error parsing JSON:", err)
+				return
+			}
+			containers = append(containers, container)
+		}
+
+		for _, container := range containers {
+			portsList := strings.Split(container.Ports, ",")
+			for i := range portsList {
+				portsList[i] = strings.TrimSpace(portsList[i])
+			}
+			ports := strings.Join(portsList, ",\n")
+
+			table.Append([]string{
+				container.ID[:12],
+				container.Image,
+				container.Names,
+				container.Status,
+				ports,
+			})
+			table.Append([]string{"", "", "", "", ""})
+		}
 	}
 
 	if showAllContainers {
