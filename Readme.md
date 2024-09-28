@@ -5,28 +5,34 @@ This Go project is a Docker formatter tool that formats the output of Docker com
 `docker ps` output is:
 
 ```bash
-CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS          PORTS                NAMES
-9a7c666f88a1   backend-app   "docker-entrypoint.s…"   34 seconds ago   Up 32 seconds   3000/tcp             nodejs-app-container
-800c5893e5dd   nginx         "/docker-entrypoint.…"   34 seconds ago   Up 32 seconds   0.0.0.0:80->80/tcp   nginx-container
-3e8f1d3736e6   postgres:14   "docker-entrypoint.s…"   34 seconds ago   Up 33 seconds   5432/tcp             postgres-container
-dcac680aa299   redis         "docker-entrypoint.s…"   34 seconds ago   Up 33 seconds   6379/tcp             redis-container
+CONTAINER ID   IMAGE         COMMAND                  CREATED              STATUS              PORTS                                                                                                                NAMES
+157b98bc2e57   backend-app   "docker-entrypoint.s…"   2 seconds ago        Up 2 seconds        3000/tcp                                                                                                             nodejs-app-container
+220a34d3a427   nginx         "/docker-entrypoint.…"   2 seconds ago        Up 2 seconds        0.0.0.0:80->80/tcp, 0.0.0.0:4343->4343/tcp, 0.0.0.0:6000->6000/tcp, 0.0.0.0:7070->7070/tcp, 0.0.0.0:9090->9090/tcp   nginx-container
+d7eefeabceff   postgres:14   "docker-entrypoint.s…"   About a minute ago   Up About a minute   5432/tcp                                                                                                             postgres-container
+27d6ce5e3b2c   redis         "docker-entrypoint.s…"   About a minute ago   Up About a minute   6379/tcp                                                                                                             redis-container
+67f53bddbf26   server-app    "docker-entrypoint.s…"   3 minutes ago        Up 3 minutes        0.0.0.0:4000->8000/tcp                                                                                               app-v2
 ```
 
 our `docker fps` (formatted ps) output will be:
 ```bash
  # SHOWING ONLY RUNNING CONTAINERS:
-·--------------·-------------·----------------------·--------------·--------------------·
-| CONTAINER ID |    IMAGE    |    CONTAINER NAME    |    STATUS    |       PORTS        |
-·--------------·-------------·----------------------·--------------·--------------------·
-| 9a7c666f88a1 | backend-app | nodejs-app-container | Up 2 seconds | 3000/tcp           |
-|              |             |                      |              |                    |
-| 800c5893e5dd | nginx       | nginx-container      | Up 1 second  | 0.0.0.0:80->80/tcp |
-|              |             |                      |              |                    |
-| 3e8f1d3736e6 | postgres:14 | postgres-container   | Up 2 seconds | 5432/tcp           |
-|              |             |                      |              |                    |
-| dcac680aa299 | redis       | redis-container      | Up 2 seconds | 6379/tcp           |
-|              |             |                      |              |                    |
-·--------------·-------------·----------------------·--------------·--------------------·
+·--------------·-------------·----------------------·-------------------·-------------------------·
+| CONTAINER ID |    IMAGE    |    CONTAINER NAME    |      STATUS       |          PORTS          |
+·--------------·-------------·----------------------·-------------------·-------------------------·
+| 157b98bc2e57 | backend-app | nodejs-app-container | Up 7 seconds      | 3000/tcp                |
+|              |             |                      |                   |                         |
+| 220a34d3a427 | nginx       | nginx-container      | Up 7 seconds      | 0.0.0.0:80->80/tcp,     |
+|              |             |                      |                   | 0.0.0.0:4343->4343/tcp, |
+|              |             |                      |                   | 0.0.0.0:6000->6000/tcp, |
+|              |             |                      |                   | 0.0.0.0:7070->7070/tcp, |
+|              |             |                      |                   | 0.0.0.0:9090->9090/tcp  |
+|              |             |                      |                   |                         |
+| d7eefeabceff | postgres:14 | postgres-container   | Up About a minute | 5432/tcp                |
+|              |             |                      |                   |                         |
+| 27d6ce5e3b2c | redis       | redis-container      | Up About a minute | 6379/tcp                |
+|              |             |                      |                   |                         |
+| 67f53bddbf26 | server-app  | app-v2               | Up 3 minutes      | 0.0.0.0:4000->8000/tcp  |
+·--------------·-------------·----------------------·-------------------·-------------------------·
 ```
 
 
@@ -83,16 +89,21 @@ source ~/.zshrc
 6. Now running `docker fps` command will show output in formatter way
 ```bash
  # SHOWING ONLY RUNNING CONTAINERS:
-·--------------·-------------·----------------------·--------------·--------------------·
-| CONTAINER ID |    IMAGE    |    CONTAINER NAME    |    STATUS    |       PORTS        |
-·--------------·-------------·----------------------·--------------·--------------------·
-| 9a7c666f88a1 | backend-app | nodejs-app-container | Up 2 seconds | 3000/tcp           |
-|              |             |                      |              |                    |
-| 800c5893e5dd | nginx       | nginx-container      | Up 1 second  | 0.0.0.0:80->80/tcp |
-|              |             |                      |              |                    |
-| 3e8f1d3736e6 | postgres:14 | postgres-container   | Up 2 seconds | 5432/tcp           |
-|              |             |                      |              |                    |
-| dcac680aa299 | redis       | redis-container      | Up 2 seconds | 6379/tcp           |
-|              |             |                      |              |                    |
-·--------------·-------------·----------------------·--------------·--------------------·
+·--------------·-------------·----------------------·-------------------·-------------------------·
+| CONTAINER ID |    IMAGE    |    CONTAINER NAME    |      STATUS       |          PORTS          |
+·--------------·-------------·----------------------·-------------------·-------------------------·
+| 157b98bc2e57 | backend-app | nodejs-app-container | Up 7 seconds      | 3000/tcp                |
+|              |             |                      |                   |                         |
+| 220a34d3a427 | nginx       | nginx-container      | Up 7 seconds      | 0.0.0.0:80->80/tcp,     |
+|              |             |                      |                   | 0.0.0.0:4343->4343/tcp, |
+|              |             |                      |                   | 0.0.0.0:6000->6000/tcp, |
+|              |             |                      |                   | 0.0.0.0:7070->7070/tcp, |
+|              |             |                      |                   | 0.0.0.0:9090->9090/tcp  |
+|              |             |                      |                   |                         |
+| d7eefeabceff | postgres:14 | postgres-container   | Up About a minute | 5432/tcp                |
+|              |             |                      |                   |                         |
+| 27d6ce5e3b2c | redis       | redis-container      | Up About a minute | 6379/tcp                |
+|              |             |                      |                   |                         |
+| 67f53bddbf26 | server-app  | app-v2               | Up 3 minutes      | 0.0.0.0:4000->8000/tcp  |
+·--------------·-------------·----------------------·-------------------·-------------------------·
 ```
