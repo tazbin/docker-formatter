@@ -66,7 +66,7 @@ func main() {
 			containers = append(containers, container)
 		}
 
-		for _, container := range containers {
+		for i, container := range containers {
 			portsList := strings.Split(container.Ports, ",")
 			for i := range portsList {
 				portsList[i] = strings.TrimSpace(portsList[i])
@@ -80,7 +80,9 @@ func main() {
 				container.Status,
 				ports,
 			})
-			table.Append([]string{"", "", "", "", ""})
+			if i != len(containers)-1 {
+				table.Append([]string{"", "", "", "", ""})
+			}
 		}
 	}
 
