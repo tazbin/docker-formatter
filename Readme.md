@@ -55,7 +55,7 @@ Before using this tool, make sure you have the following installed:
 1. Clone the repository:
 
 ```bash
-git clone <https://github.com/tazbin/docker-formatter.git>
+git clone https://github.com/tazbin/docker-formatter.git
 cd docker-formatter
 ```
 
@@ -84,7 +84,7 @@ docker() {
 5. Now finally source `.zshrc` file
 ```bash
 source ~/.zshrc
-```
+```****
 
 6. Now running `docker fps` command will show output in formatter way
 ```bash
